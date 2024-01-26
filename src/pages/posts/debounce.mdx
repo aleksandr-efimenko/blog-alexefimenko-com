@@ -1,16 +1,20 @@
 ---
-title: "Let’s implement a Debounce function in Javascript"
-excerpt: "Debounce function is used to limit the rate at which a function can fire. In this article, we will implement a custom debounce function. We will use closures and setTimeout to implement the debounce function.
-"
-coverImage: "/blog/debounce-function/cover.jpg"
-date: "2023-11-12T05:35:07.322Z"
-ogImage:
-  url: "/blog/debounce-function/cover.jpg"
+title: Let’s implement a Debounce function in Javascript
+description: Debounce function is used to limit the rate at which a function can fire. In this article, we will implement a custom debounce function. We will use closures and setTimeout to implement the debounce function
+tags: [javascript, fundamentals]
+date: 2023-11-12
+image: /blog-assets/debounce-function/cover.jpg
+thumbnail: /blog-assets/debounce-function/cover.jpg
 ---
+
+# Let’s implement a Debounce function in Javascript
 
 A debounce function is used to limit the rate at which a function can fire.
 
-Previously I used [Lodash’s debounce function](https://lodash.com/docs/4.17.15#debounce), so I didn’t know how it worked and decided to implement it myself. I think it would be a good exercise and maybe help someone else come up with a better understanding of how it works.
+The most common way to implement a debounce function is to use [Lodash’s debounce function](https://lodash.com/docs/4.17.15#debounce).
+Lodash is a popular Javascript utility library that provides a lot of useful functions. It is a great library, but it is also a big library. If you are not using Lodash in your project, you can implement a debounce function yourself.
+
+> Debounced function delays invoking func until after wait milliseconds have elapsed since the last time the debounced function was invoked.
 
 Check how debounce works:
 
@@ -18,7 +22,7 @@ import DebounceExample from '@/components/debounce-example'
 
 <DebounceExample />
 
-### Real-life examples:
+### Real-life examples
 
 - Doing an API call on every keypress in an input. If the user types fast, we will fire a lot of API calls, which is not good. We can use debounce to limit the rate at which the API calls are made.
 - A button click is handled by a function that will only run once in a given period, such as the Save button. If the user clicks the button multiple times, we will only run the function once.
