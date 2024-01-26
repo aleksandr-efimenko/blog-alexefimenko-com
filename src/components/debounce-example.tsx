@@ -1,4 +1,5 @@
 // Example from https://beta.reactjs.org/learn
+import { Button } from 'nextra/components'
 import { useState, useRef } from 'react'
 
 const WAIT_INTERVAL = 1000
@@ -56,28 +57,18 @@ function DebounceExample() {
   return (
     <>
       <div className='flex gap-2'>
-        <div className='flex-'>
-          <h3>Regular execution</h3>
-          <button
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-            onClick={executeWithoutDebounce}
-          >
-            count is {count}
-          </button>
+        <div className='flex'>
+          <h3 className='mr-2 text-lg'>Regular execution</h3>
+          <Button onClick={executeWithoutDebounce}>count is {count}</Button>
         </div>
         <div className='flex-ite='>
           <h3>Debounced execution</h3>
-          <button
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-            onClick={executeDebounced}
-          >
-            count is {count}
-          </button>
+          <Button onClick={executeDebounced}>count is {count}</Button>
         </div>
       </div>
       <h3>{countDown.replace('.', ':')}</h3>
       <h3>Clicks: {clicks}</h3>
-      <button onClick={reset}>Reset</button>
+      <Button onClick={reset}>Reset</Button>
     </>
   )
 }
