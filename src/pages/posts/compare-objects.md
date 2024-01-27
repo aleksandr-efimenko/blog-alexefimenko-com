@@ -1,11 +1,12 @@
 ---
-title: 'Exploring 4 Ways to Compare Objects in JavaScript with Performance Analysis'
-excerpt: 'In this article, I will implement a custom object and array comparison function. I will use recursion to implement the comparison function. I will also compare the performance of different methods of object comparison.'
-coverImage: '/blog/compare-objects/cover.png'
-date: '2023-12-29'
-ogImage:
-  url: '/blog/compare-objects/cover.png'
+title: Exploring 4 Ways to Compare Objects in JavaScript with Performance Analysis
+description: In this article, I will implement a custom object and array comparison function. I will use recursion to implement the comparison function. I will also compare the performance of different methods of object comparison.
+tags: [javascript, fundamentals]
+date: 2023-12-29
+image: /blog-assets/compare-objects/cover.png
+thumbnail: /blog-assets/compare-objects/cover.png
 ---
+
 
 ### Introduction
 
@@ -246,7 +247,7 @@ I ran this code with different sizes of objects and got the following results:
 | 1000000        | 398.3462      | 455.5247 | 531.1270    | 736.3083       | 1085.5547 |
 
 Graphical representation of the results:
-![Graphical representation of performance comparison of different methods of object comparison](/blog/compare-objects/performance-object-comparison.png)
+![Graphical representation of performance comparison of different methods of object comparison](/blog-assets/compare-objects/performance-object-comparison.png)
 
 Obviously, my implementation is not optimized. Does anyone know how to improve it? Please let me know if you have any suggestions.
 Anyway, it was an interesting experiment, I learned how to use the performance.now() method and how to compare objects and arrays in Javascript.

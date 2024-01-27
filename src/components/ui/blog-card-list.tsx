@@ -2,24 +2,17 @@ import { ReactElement } from 'react'
 import NextLink from 'next/link'
 import clsx from 'clsx'
 import { format } from 'date-fns'
-import { MetaWithLink } from '../../lib/meta'
+import { Meta } from '../../lib/meta'
 import { Description } from './description'
 import { Heading } from './heading'
-import Image from 'next/image'
 
-export const BlogCardList = ({
-  articles,
-  className,
-}: {
-  articles: MetaWithLink[]
-  className?: string
-}): ReactElement => {
+export const BlogCardList = ({ articles, className }: { articles: Meta[]; className?: string }): ReactElement => {
   return (
     <div className={clsx('my-12 flex flex-wrap justify-center gap-x-7 gap-y-10', className)}>
       {articles.map((article) => (
         <NextLink
           key={article.link}
-          href={article.link}
+          href={article.link ?? '/404'}
           className='
           flex
           w-[278px]
@@ -53,9 +46,6 @@ export const BlogCardList = ({
               {article.description}
             </Description>
             <div className='mt-auto text-xs'>
-              {/* <span className="font-bold dark:text-[#C4C4C4]">
-                {AUTHORS[article.authors[0]].name}
-              </span> */}
               <span className='dark:text-gray-500'>
                 <span className='select-none'> • </span>
                 {format(new Date(article.date), 'LLL do y')}

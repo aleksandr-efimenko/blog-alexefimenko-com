@@ -1,10 +1,9 @@
 ---
 title: 'Building a Local Development Environment: Running a Next.js Full-Stack Application with PostgreSQL and Minio S3 Using Docker-Compose'
-excerpt: 'In this article, we will look at how to build a local development environment for a full-stack Next.js application with PostgreSQL and Minio S3 using Docker-Compose.'
-coverImage: '/blog/nextjs-postgres-s3-locally/cover.png'
-date: '2024-06-01'
-ogImage:
-  url: '/blog/nextjs-postgres-s3-locally/cover.png'
+description: In this article, we will look at how to build a local development environment for a full-stack Next.js application with PostgreSQL and Minio S3 using Docker-Compose.
+date: 2024-06-01
+image: /blog-assets/nextjs-postgres-s3-locally/cover.png
+ogImage: /blog-assets/nextjs-postgres-s3-locally/cover.png
 ---
 
 # Building a Local Development Environment: Running a Next.js Full-Stack Application with PostgreSQL and Minio S3 Using Docker-Compose
@@ -285,7 +284,3 @@ In this article, we looked at how to build a local development environment for a
 I hope you found this article useful. If you have any questions or comments, please let me know in the comments below.
 
 In the next article, we add a file upload functionality and database integration to our application.
-
----
-
-I'm always open to making new connections! Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/aleksandr-efimenko)

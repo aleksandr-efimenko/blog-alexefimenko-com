@@ -6,5 +6,5 @@ export type Meta = {
   description: string
   image: string
   thumbnail?: string
-  route?: string
+  link?: string
 }

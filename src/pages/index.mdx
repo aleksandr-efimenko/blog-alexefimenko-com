@@ -1,10 +1,10 @@
-## Component
+## Latest posts
 
 import { getAllPages, getCurrentLevelPages, getPagesUnderRoute } from 'nextra/context'
 import { BlogCardList } from '@/components/ui/blog-card-list'
 import { transformMeta } from '@/lib/get-post-from-files'
+import { sortByDateDesc } from '@/lib/sort-by-date'
 
-{console.log(transformMeta(getPagesUnderRoute('/posts')))
-}
+{console.log(transformMeta(getPagesUnderRoute('/posts')))}
 
 <BlogCardList articles={transformMeta(getPagesUnderRoute('/posts'))} />

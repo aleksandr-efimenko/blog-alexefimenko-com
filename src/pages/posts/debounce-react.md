@@ -1,10 +1,10 @@
 ---
-title: 'Implementing Debounce in React for Efficient Delayed Search Queries'
-excerpt: 'In this article, we will look at how to implement debounce in React for efficient delayed search queries. We will look at how to implement debounce in React using the useRef hook.'
-coverImage: '/blog/debounce-react/cover.png'
-date: '2024-04-01'
-ogImage:
-  url: '/blog/debounce-react/cover.png'
+title: Implementing Debounce in React for Efficient Delayed Search Queries
+description: In this article, we will look at how to implement debounce in React for efficient delayed search queries. We will look at how to implement debounce in React using the useRef hook.
+tags: [javascript, fundamentals, react]
+date: 2024-04-01
+image: /blog-assets/debounce-react/cover.png
+thumbnail: /blog-assets/debounce-react/cover.png
 ---
 
 In this article, we will look at how to implement debounce in React for efficient delayed search queries. The problem we are trying to solve is that we want to make an API call to search for a user after the user has stopped typing for 1s (in real life, it would be more like 300ms). It will make the API calls more efficient and reduce the load on the server.
