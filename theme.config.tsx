@@ -1,5 +1,5 @@
 export default {
-  logo: <span>My Nextra Documentation</span>,
+  logo: <span>Alex's blog</span>,
   project: {
     link: 'https://github.com/aleksandr-efimenko/blog-alexefimenko-com',
   },

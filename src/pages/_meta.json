@@ -1,9 +1,0 @@
-{
-    "index": "Home page",
-    "debounce": {
-        "title": "Let’s implement a Debounce function in Javascript",
-        "theme": {
-            "typesetting": "article"
-          }
-    }
-}
