@@ -1,7 +1,7 @@
 import { PageOpts } from 'nextra/types'
 import { Meta } from './meta'
 
-export function transformMeta(pages: PageOpts[]): Meta[] {
+export function getArticles(pages: PageOpts[], tag?: string): Meta[] {
   return pages
     .map(({ frontMatter, route }) => {
       return {
@@ -12,6 +12,12 @@ export function transformMeta(pages: PageOpts[]): Meta[] {
         image: frontMatter.image,
         link: route,
       }
+    })
+    .filter((meta) => {
+      if (tag) {
+        return meta.tags?.includes(tag)
+      }
+      return true
     })
     .sort((left, right) => {
       const date1 = new Date(left.date)

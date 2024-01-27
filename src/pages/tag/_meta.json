@@ -1,0 +1,10 @@
+ {
+  "*": {
+    "theme": {
+      "sidebar": false,
+      "footer": false,
+      "layout": "full",
+      "toc": false
+    }
+  }
+}

@@ -45,7 +45,7 @@ export const TagList = ({
       {tags.map((tagOrTagCount) => {
         const [tag, count] = Array.isArray(tagOrTagCount) ? tagOrTagCount : [tagOrTagCount, 0]
         return (
-          <Tag key={tag} href={asLink ? `/blog/tag/${tag}` : ''} isActive={tag === router.query.tag}>
+          <Tag key={tag} href={asLink ? `/tag/${tag}` : ''} isActive={tag === router.query.tag}>
             {withCount && count > 0 ? `${tag} (${count})` : tag}
           </Tag>
         )
