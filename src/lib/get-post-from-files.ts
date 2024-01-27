@@ -25,3 +25,22 @@ export function transformMeta(pages: PageOpts[]): Meta[] {
       return 0
     })
 }
+
+export function getTags(pages: PageOpts[]): (string | [string, number])[] {
+  const tags = pages.reduce((acc, { frontMatter }) => {
+    if (frontMatter.tags) {
+      frontMatter.tags.forEach((tag: string | number) => {
+        if (acc[tag]) {
+          acc[tag]++
+        } else {
+          acc[tag] = 1
+        }
+      })
+    }
+    return acc
+  }, {} as Record<string, number>)
+
+  return Object.entries(tags).sort((left, right) => {
+    return right[1] - left[1]
+  })
+}

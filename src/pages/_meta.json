@@ -8,5 +8,12 @@
       "breadcrumb": false,
       "pagination": false
     }
+  },
+  "index": {
+    "theme": {
+      "sidebar": false,
+      "footer": false,
+      "toc": false
+    }
   }
 }
