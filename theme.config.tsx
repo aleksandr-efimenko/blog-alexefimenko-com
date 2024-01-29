@@ -25,4 +25,23 @@ export default {
       <meta property='og:description' content='The next site builder' />
     </>
   ),
+  footer: {
+    text: (
+      <>
+        <div className='flex flex-col items-center justify-center'>
+          <div className='flex items-center justify-center'>
+            <a href='https://nextra.site/' target='_blank' rel='noopener noreferrer'>
+              This blog was built with Nextra
+            </a>
+            <span className='mx-2'>•</span>
+            and
+            <span className='mx-2'>•</span>
+            <a href='https://the-guild.dev/' target='_blank' rel='noopener noreferrer'>
+              The Guild components
+            </a>
+          </div>
+        </div>
+      </>
+    ),
+  },
 }
