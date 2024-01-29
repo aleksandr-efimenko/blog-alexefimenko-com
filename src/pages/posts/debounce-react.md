@@ -2,7 +2,7 @@
 title: Implementing Debounce in React for Efficient Delayed Search Queries
 description: In this article, we will look at how to implement debounce in React for efficient delayed search queries. We will look at how to implement debounce in React using the useRef hook.
 tags: [javascript, fundamentals, react]
-date: 2024-04-01
+date: 2024-01-08
 image: /blog-assets/debounce-react/cover.png
 thumbnail: /blog-assets/debounce-react/cover.png
 ---

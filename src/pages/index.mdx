@@ -1,10 +1,8 @@
-import { getAllPages, getCurrentLevelPages, getPagesUnderRoute } from 'nextra/context'
-import { BlogCardList } from '@/components/ui/blog-card-list'
-import { TagList } from '@/components/ui/tag-list'
-import { getArticles, getTags } from '@/lib/get-post-from-files'
-import { Bleed } from 'nextra-theme-docs'
+---
+title: Alex's Blog - Web Development
+description: Home page of my personal blog related to web development
+---
 
-<Bleed>
-  <TagList tags={getTags(getPagesUnderRoute('/posts'))} withCount asLink className='mb-20 mt-10' />
-  <BlogCardList articles={getArticles(getPagesUnderRoute('/posts'))} />
-</Bleed>
+import { TagPage } from './tag/TagPage.tsx'
+
+<TagPage />

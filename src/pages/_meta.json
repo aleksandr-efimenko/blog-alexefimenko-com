@@ -5,15 +5,20 @@
       "sidebar": false,
       "toc": true,
       "typesetting": "article",
-      "breadcrumb": false,
-      "pagination": false
+      "breadcrumb": false
     }
   },
   "index": {
     "theme": {
+      "layout": "default",
+      "typesetting": "article",
+
       "sidebar": false,
-      "footer": false,
-      "toc": false
-    }
+      "toc": false,
+      "pagination": false
+
+    },
+    "title": "Home",
+    "type": "page"
   }
 }

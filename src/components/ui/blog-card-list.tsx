@@ -8,7 +8,7 @@ import { Heading } from './heading'
 
 export const BlogCardList = ({ articles, className }: { articles: Meta[]; className?: string }): ReactElement => {
   return (
-    <div className={clsx('my-12 flex flex-wrap justify-center gap-x-7 gap-y-10 w-fit', className)}>
+    <div className={clsx('my-12 flex flex-wrap justify-center gap-x-5 gap-y-10 w-full', className)}>
       {articles.map((article) => (
         <NextLink
           key={article.link}

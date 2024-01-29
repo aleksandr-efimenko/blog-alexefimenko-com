@@ -1,12 +1,6 @@
-import type { Config } from 'tailwindcss'
+const config = require('@theguild/tailwind-config')
 
-const config: Config = {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
-  theme: {},
-  plugins: [],
+module.exports = {
+  ...config,
+  content: [...config.content, './{pages,ui}/**/*.{tsx,mdx}'],
 }
-export default config

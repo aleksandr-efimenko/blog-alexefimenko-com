@@ -1,10 +1,12 @@
- {
+{
   "*": {
     "theme": {
+      "layout": "default",
       "sidebar": false,
-      "footer": false,
-      "layout": "full",
-      "toc": false
+      "toc": true,
+      "typesetting": "article",
+      "breadcrumb": false,
+      "pagination": false
     }
   }
 }
