@@ -1,14 +1,17 @@
 ---
-title: 'Building a File Storage With Next.js, PostgreSQL, and Minio S3'
-description: 'In this article, we will build a full-stack application using Next.js, PostgreSQL, and Minio S3.'
-date: '2024-01-30'
-image: '/blog-assets/file-storage-nextjs-postgres-s3/cover.png'
-thumbnail: '/blog/nextjs-postgres-s3-locally/cover.png'
+title: Building a File Storage With Next.js, PostgreSQL, and Minio S3
+description: In this article, we will build a full-stack application using Next.js, PostgreSQL, and Minio S3.
+date: 2024-01-31
+tags: [nextjs, react, postgres, minio, docker]
+image: /blog-assets/file-storage-nextjs-postgres-s3/cover.png
+thumbnail: /blog/nextjs-postgres-s3-locally/cover.png
 ---
 
-## Building a file storage with Next.js, PostgreSQL, and Minio S3
+# Building a file storage with Next.js, PostgreSQL, and Minio S3
 
 ![Building a file storage with Next.js, PostgreSQL, and Minio S3](/blog-assets/file-storage-nextjs-postgres-s3/cover.png)
+
+## Introduction
 
 In the early days of web development, files like images and documents were stored on the web server along with the application code. However, with increasing user traffic and the need to store large files, cloud storage services like Amazon S3 have become the preferred way to store files.
 
@@ -27,7 +30,9 @@ In this article, we will build an example of a file storage application using Ne
 1. Using presigned URLs to get temporary access to upload files and then upload files directly from frontend to S3.
    This approach is a little bit more complex, but it does not use resources on the Next.js server with file uploads.
 
-## [Link to the GitHub Repository](https://github.com/aleksandr-efimenko/local-nextjs-postgres-s3)
+## Source Code
+
+You can find the full source code for this tutorial on [GitHub](https://github.com/aleksandr-efimenko/local-nextjs-postgres-s3)
 
 ### 1. Upload and download files using Next.js API routes (4MB limit)
 
@@ -136,8 +141,6 @@ Install Minio S3 client for Node.js.
 ```bash
 npm install minio
 ```
-
-Next, we will create an API endpoint to upload files. We will use the [multer](https://www.npmjs.com/package/multer) library to upload files.
 
 ### References and Further Reading
 

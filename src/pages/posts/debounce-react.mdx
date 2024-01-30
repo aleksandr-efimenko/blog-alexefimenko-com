@@ -16,12 +16,13 @@ We will use the debounce function from my previous article [Let’s implement a 
 
 You can check how it works in the CodeSandbox below:
 
-<iframe src="https://codesandbox.io/embed/jw28mj?view=preview&hideNavigation=1"
-     style="width:100%; height: 500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="debounce-react-search"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-   ></iframe>
+<iframe
+  src='https://codesandbox.io/embed/jw28mj?view=preview&hideNavigation=1'
+  style='width:100%; height: 500px; border:0; border-radius: 4px; overflow:hidden;'
+  title='debounce-react-search'
+  allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+  sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+></iframe>
 
 The main problem to use the debounce function in React is that we need to store the timer ID between renders. If we just use a useState hook, the timer ID will be reset on every render. So for this, we will use the useRef hook as it is [recommended by the React team](Let’s implement a Debounce function in Javascript).
 
