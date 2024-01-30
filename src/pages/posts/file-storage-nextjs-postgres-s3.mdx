@@ -11,6 +11,8 @@ thumbnail: /blog/nextjs-postgres-s3-locally/cover.png
 
 ![Building a file storage with Next.js, PostgreSQL, and Minio S3](/blog-assets/file-storage-nextjs-postgres-s3/cover.png)
 
+It is the second part of the series of articles about building a file storage with Next.js, PostgreSQL, and Minio S3. In [the first part](http://blog.alexefimenko.com/posts/nextjs-postgres-s3-locally), we have set up the development environment using Docker Compose. In this part, we will build a full-stack application using Next.js, PostgreSQL, and Minio S3.
+
 ## Introduction
 
 In the early days of web development, files like images and documents were stored on the web server along with the application code. However, with increasing user traffic and the need to store large files, cloud storage services like Amazon S3 have become the preferred way to store files.
@@ -58,7 +60,7 @@ To download files:
 
 To upload files, we will create a form with a file input field. First, we will create a `components` folder in the `src` folder. And create a `UploadFilesFormUI.tsx` file in the `components` folder. This file will contain the UI for the upload form which will be used in both approaches. Here is a simplified version of the file:
 
-```js filename="src/components/UploadFilesFormUI.tsx" copy
+```js filename="src/components/UploadFilesForm/UploadFilesFormUI.tsx" copy
 import Link from 'next/link'
 import { LoadSpinner } from '../LoadSpinner'
 import { type UploadFilesFormUIProps } from '~/utils/types'
@@ -93,7 +95,63 @@ export function UploadFilesFormUI({ isLoading, fileInputRef, uploadToServer, max
 }
 ```
 
-##### 1.1.2 Upload form logic
+##### 1.1.2 Upload form logic for API routes
+
+Next, we will create a `UploadFilesRoute.tsx` file in the `components` folder. This file will contain the logic for the upload form which will be used in the API routes approach. Here is a simplified version, without validation, loading state and error handling:
+
+```tsx filename="src/components/UploadFilesForm/UploadFilesRoute.tsx" copy
+import { useState, useRef } from 'react'
+import { validateFiles, createFormData } from '~/utils/fileUploadHelpers'
+import { MAX_FILE_SIZE_NEXTJS_ROUTE } from '~/utils/fileUploadHelpers'
+import { UploadFilesFormUI } from './UploadFilesFormUI'
+
+type UploadFilesFormProps = {
+  onUploadSuccess: () => void
+}
+
+export function UploadFilesRoute({ onUploadSuccess }: UploadFilesFormProps) {
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
+
+  const uploadToServer = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const files = Object.values(fileInputRef.current?.files)
+
+    const formData = createFormData(files)
+    const response = await fetch('/api/files/upload/smallFiles', {
+      method: 'POST',
+      body: formData,
+    })
+    const body = (await response.json()) as {
+      status: 'ok' | 'fail'
+      message: string
+    }
+  }
+
+  return (
+    <UploadFilesFormUI
+      isLoading={isLoading}
+      fileInputRef={fileInputRef}
+      uploadToServer={uploadToServer}
+      maxFileSize={MAX_FILE_SIZE_NEXTJS_ROUTE}
+    />
+  )
+}
+```
+
+Check the full code in the [GitHub repository](https://github.com/aleksandr-efimenko/local-nextjs-postgres-s3/blob/main/src/components/UploadFilesForm/UploadFilesRoute.tsx)
+
+It's usually a good idea to extract the logic of the UI component into a separate file. One way is to create hooks for the logic and use the hooks in the UI component, however, for simplicity, we will create a separate file for the logic "fileUploadHelpers.ts" and use it in the "UploadFilesRoute" component.
+
+```tsx filename="src/utils/fileUploadHelpers.ts" copy
+export function createFormData(files: File[]): FormData {
+  const formData = new FormData()
+  files.forEach((file) => {
+    formData.append('file', file)
+  })
+  return formData
+}
+```
 
 #### 1.2. Backend
 
