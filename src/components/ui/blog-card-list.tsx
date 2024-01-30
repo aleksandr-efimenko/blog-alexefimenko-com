@@ -1,7 +1,6 @@
 import { ReactElement } from 'react'
 import NextLink from 'next/link'
 import clsx from 'clsx'
-import { format } from 'date-fns'
 import { Meta } from '../../lib/meta'
 import { Description } from './description'
 import { Heading } from './heading'
@@ -48,7 +47,11 @@ export const BlogCardList = ({ articles, className }: { articles: Meta[]; classN
             <div className='mt-auto text-xs'>
               <span className='dark:text-gray-500'>
                 <span className='select-none'> • </span>
-                {format(new Date(article.date), 'LLL do y')}
+                {new Date(article.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
               </span>
             </div>
           </div>
