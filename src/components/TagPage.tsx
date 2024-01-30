@@ -6,6 +6,7 @@ import { getArticles, getTags } from '@/lib/get-post-from-files'
 import { Bleed } from 'nextra-theme-docs'
 
 export function TagPage({ tag, title }: { tag?: string; title?: string }) {
+  console.log(getPagesUnderRoute('/posts'))
   return (
     <Bleed>
       <h1 className='text-4xl font-bold mb-10'>{title}</h1>

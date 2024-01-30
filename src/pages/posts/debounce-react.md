@@ -5,6 +5,7 @@ tags: [javascript, fundamentals, react]
 date: 2024-01-08
 image: /blog-assets/debounce-react/cover.png
 thumbnail: /blog-assets/debounce-react/cover.png
+published: true
 ---
 
 # Implementing Debounce in React for Efficient Delayed Search Queries

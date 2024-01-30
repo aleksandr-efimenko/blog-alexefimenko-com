@@ -7,4 +7,5 @@ export type Meta = {
   image: string
   thumbnail?: string
   link?: string
+  published?: boolean
 }

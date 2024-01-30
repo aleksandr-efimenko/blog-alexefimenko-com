@@ -5,6 +5,7 @@ tags: [javascript, fundamentals]
 date: 2023-12-29
 image: /blog-assets/compare-objects/cover.png
 thumbnail: /blog-assets/compare-objects/cover.png
+published: true
 ---
 
 # 4 Ways to Compare Objects in JavaScript with Performance Analysis
