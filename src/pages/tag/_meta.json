@@ -8,5 +8,29 @@
       "breadcrumb": false,
       "pagination": false
     }
+  },
+  "docker": {
+    "title": "Docker"
+  },
+  "fundamentals": {
+    "title": "Javascript Fundamentals"
+  },
+  "javascript": {
+    "title": "Javascript"
+  },
+  "minio": {
+    "title": "Minio"
+  },
+  "Next.js": {
+    "title": "Next.js"
+  },
+  "nodejs": {
+    "title": "Node.js"
+  },
+  "react": {
+    "title": "React"
+  },
+  "postgres": {
+    "title": "PostgreSQL"
   }
 }

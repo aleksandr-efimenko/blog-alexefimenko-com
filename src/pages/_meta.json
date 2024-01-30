@@ -9,16 +9,24 @@
     }
   },
   "index": {
+    "display": "hidden",
     "theme": {
       "layout": "default",
-      "typesetting": "article",
-
       "sidebar": false,
-      "toc": false,
-      "pagination": false
-
-    },
-    "title": "Home",
-    "type": "page"
+      "pagination": false,
+      "toc": false
+      }
+  },
+  "posts": {
+    "title": "Posts"
+  },
+  "tag": {
+    "title": "Tags"
+  },
+  "about": {
+    "title": "About",
+    "type": "page",
+    "href": "https://alexefimenko.com"
   }
 }
+
