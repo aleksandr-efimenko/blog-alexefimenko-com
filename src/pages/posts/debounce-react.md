@@ -7,6 +7,8 @@ image: /blog-assets/debounce-react/cover.png
 thumbnail: /blog-assets/debounce-react/cover.png
 ---
 
+# Implementing Debounce in React for Efficient Delayed Search Queries
+
 In this article, we will look at how to implement debounce in React for efficient delayed search queries. The problem we are trying to solve is that we want to make an API call to search for a user after the user has stopped typing for 1s (in real life, it would be more like 300ms). It will make the API calls more efficient and reduce the load on the server.
 
 We will use the debounce function from my previous article [Let’s implement a Debounce function in Javascript](https://alexefimenko.com/blog/debounce-function). But we will need to adjust it a bit to use it in a React component.

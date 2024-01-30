@@ -7,6 +7,7 @@ image: /blog-assets/compare-objects/cover.png
 thumbnail: /blog-assets/compare-objects/cover.png
 ---
 
+# 4 Ways to Compare Objects in JavaScript with Performance Analysis
 
 ### Introduction
 
@@ -14,9 +15,9 @@ Deep equality check is a common problem in Javascript. Unlike the regular equali
 
 The problem with the regular equality operator is that it only checks references of the objects or arrays. If two objects or arrays have the same values but different references, they will not be considered equal.
 
-### There are several common ways to compare objects and arrays in Javascript:
+There are several common ways to compare objects and arrays in Javascript:
 
-#### 1. [Fast-deep-equal](https://github.com/epoberezkin/fast-deep-equal) and other similar libraries
+### 1. [Fast-deep-equal](https://github.com/epoberezkin/fast-deep-equal) and other similar libraries
 
 This library provides a function called equal() which can be used to compare objects and arrays. It is a very popular library, it has 20+ million weekly downloads on npm.
 
@@ -64,7 +65,7 @@ Other libraries:
 
 ---
 
-#### 2. [Node.js assert.deepEqual() method](https://nodejs.org/api/assert.html#assert_assert_deepstrictequal_actual_expected_message) and [Node.js util.isDeepStrictEqual() method](https://nodejs.org/api/util.html#util_util_isdeepstrictequal_val1_val2)
+### 2. [Node.js assert.deepEqual() method](https://nodejs.org/api/assert.html#assert_assert_deepstrictequal_actual_expected_message) and [Node.js util.isDeepStrictEqual() method](https://nodejs.org/api/util.html#util_util_isdeepstrictequal_val1_val2)
 
 This is a part of the Node.js assert module.
 
@@ -74,7 +75,7 @@ Another issue is this function throws an error if the objects are not equal. Thi
 
 util.isDeepStrictEqual() is similar to assert.deepEqual() but it does not throw an error if the objects are not equal. It returns true or false depending on whether the objects are equal or not. This is more suitable for conditional statements.
 
-```javascript
+```js
 const assert = require('assert').strict
 
 const obj1 = { a: 1, b: 2 }
@@ -89,7 +90,7 @@ assert.deepEqual(obj1, obj3) // AssertionError [ERR_ASSERTION]: Expected values 
 
 ---
 
-#### 3. [JSON.stringify() method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
+### 3. [JSON.stringify() method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 
 This is a built-in method in Javascript. It converts a Javascript object or array into a JSON string. The JSON string can be compared using the regular equality operator. This is the most used method to compare objects and arrays in Javascript.
 
@@ -133,7 +134,7 @@ JSON.stringify(obj6) // "{"a":1}"
 
 ---
 
-#### 4. Custom object and array comparison function
+### 4. Custom object and array comparison function
 
 Let's implement a custom object and array comparison function. We will use recursion to implement the comparison function.
 
