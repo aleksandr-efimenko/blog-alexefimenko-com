@@ -1,4 +1,4 @@
-// Example from https://beta.reactjs.org/learn
+import clsx from 'clsx'
 import { Button } from 'nextra/components'
 import { useState, useRef } from 'react'
 
@@ -55,21 +55,29 @@ function DebounceExample() {
   }
 
   return (
-    <>
+    <div className='w-full bg-gray-100 p-4 rounded-sm dark:bg-gray-800'>
       <div className='flex gap-2'>
-        <div className='flex'>
-          <h3 className='mr-2 text-lg'>Regular execution</h3>
+        <div className='flex flex-col flex-1 items-center gap-3'>
+          <h3 className='mr-2 text-lg '>Regular execution</h3>
           <Button onClick={executeWithoutDebounce}>count is {count}</Button>
         </div>
-        <div className='flex-ite='>
+        <div className='flex flex-col flex-1 items-center gap-3'>
           <h3>Debounced execution</h3>
-          <Button onClick={executeDebounced}>count is {count}</Button>
+          <Button className={clsx(Number(countDown) < 1 && 'animate-pulse scale-150')} onClick={executeDebounced}>
+            count is {count}
+          </Button>
         </div>
       </div>
-      <h3>{countDown.replace('.', ':')}</h3>
-      <h3>Clicks: {clicks}</h3>
-      <Button onClick={reset}>Reset</Button>
-    </>
+      <div className='w-full text-center'>
+        <h4 className='text-2xl'>{countDown.replace('.', ':')}</h4>
+        <h4 className='text-3xl'>Clicks: {clicks}</h4>
+
+        <h4 className='text-3xl'>Count: {count}</h4>
+        <Button className='mt-3' onClick={reset}>
+          Reset
+        </Button>
+      </div>
+    </div>
   )
 }
 
