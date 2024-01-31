@@ -23,7 +23,7 @@ export default function DebounceReactSearch() {
 
   // Debounce function
   function debounce(func: Function, delay: number) {
-    return function (...args: []) {
+    return function (...args: any[]) {
       if (debounceTimeout.current) clearTimeout(debounceTimeout.current)
       debounceTimeout.current = setTimeout(() => {
         func(...args)
