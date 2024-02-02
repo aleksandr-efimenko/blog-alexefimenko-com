@@ -740,9 +740,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 export default handler
 ```
 
-## 2.1 Upload and download files using presigned URLs
+## 2.1 Upload files using presigned URLs
 
-![Upload and files using presigned URLs Diagram](/blog-assets/file-storage-nextjs-postgres-s3/presigned-urls-upload-diagram.png)
+![Upload files using presigned URLs Diagram](/blog-assets/file-storage-nextjs-postgres-s3/presigned-urls-upload-diagram.png)
 
 In the diagram above, we can see the steps involved in uploading and downloading files using presigned URLs. It is a more complex approach, but it does not use resources on the Next.js server with file uploads. The presigned URL is generated on the server and sent to the client. The client uses the presigned URL to upload the file directly to S3.
 
