@@ -81,13 +81,8 @@ S3_BUCKET_NAME="my-bucket"
 For using Google Cloud Storage, the .env file will look like this:
 
 ```env filename=".env" copy
-DATABASE_URL="postgresql://postgres:postgres@REMOTESERVERHOST:5432/myapp-db?schema=public"
-
 S3_ENDPOINT="storage.googleapis.com"
-S3_PORT="9000"
-S3_ACCESS_KEY="GOOG1EEXAMPLEKEYDFDSDFSDKJFKLSDJFSLKSDJDSF"
-S3_SECRET_KEY="wJDFJKSJDOIVMDSOIJFLKDSJkdDFiCYEXAMPLEKEY"
-S3_BUCKET_NAME="my-bucket"
+...
 
 ```
 
@@ -125,7 +120,7 @@ export async function createBucketIfNotExists(bucketName: string) {
 }
 ```
 
-### Main page and file list request to the database
+### Main page wit file list
 
 The main page will contain the upload form and the list of uploaded files.
 
@@ -392,7 +387,7 @@ export function UploadFilesFormUI({ isLoading, fileInputRef, uploadToServer, max
 }
 ```
 
-## 1. Upload files using Next.js API routes (4MB limit)
+## 1.1 Upload files using Next.js API routes (4MB limit)
 
 ![Upload files using Next.js API route](/blog-assets/file-storage-nextjs-postgres-s3/API-route-upload-diagram.png)
 
@@ -646,11 +641,14 @@ Remember to include `export const config`, this prevents built-in body parser of
 
 ## 1.2 Download files using Next.js API routes (4MB limit)
 
+![Download files using Next.js API route](/blog-assets/file-storage-nextjs-postgres-s3/api-route-download-diagram.png)
+
 To download files:
 
-1. User sends a GET request to the API route to get data from the database about the file(s) to download.
-2. The API route downloads the file from S3.
-3. The file is returned to the user from the API route.
+1. User sends a GET request to the API route with the file id to download.
+2. The API route requests the file name from the database.
+3. The API route downloads the file from S3.
+4. The file is piped to the response object and returned to the client.
 
 ### Frontend - Download files using Next.js API routes
 
@@ -741,7 +739,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 export default handler
 ```
 
-## 2. Upload and download files using presigned URLs
+## 2.1 Upload and download files using presigned URLs
 
 ![Upload and files using presigned URLs Diagram](/blog-assets/file-storage-nextjs-postgres-s3/presigned-urls-upload-diagram.png)
 
@@ -756,14 +754,6 @@ To upload files:
 5. The client uploads the files directly to S3 using the presigned URLs and PUT requests.
 6. The client sends the file info to the API route to save the file info.
 7. The API route saves the file info to the database.
-
-To download files:
-
-1. The user sends a GET request to the API route to get data from the database about the file(s) to download.
-2. The API route sends requests to S3 to generate presigned URLs for each file.
-3. The S3 returns the presigned URLs to the API route.
-4. The API route sends the presigned URLs to the client.
-5. The client downloads the files directly from S3 using the presigned URLs and GET requests.
 
 ### Frontend - Upload form logic for presigned URLs
 
@@ -1049,9 +1039,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 }
 ```
 
-## Delete files from S3
+## 2.2 Download files using presigned URLs
 
-There is no difference in deleting files from S3 using API routes or presigned URLs. To handle d
+![Download files using presigned URLs Diagram](/blog-assets/file-storage-nextjs-postgres-s3/presigned-urls-dowload-diagram.png)
+
+To download files:
+
+1. The user sends a GET request with file id to the API route to get file.
+2. The API route sends a request to the database to get the file name and receives the file name.
+3. The API route sends a request to S3 to generate a presigned URL for the file and receives the presigned URL.
+4. The API route sends the presigned URL to the client.
+5. The client downloads the file directly from S3 using the presigned URL.
+
+## 3. Delete files from S3
+
+![Delete files from S3 Diagram](/blog-assets/file-storage-nextjs-postgres-s3/delete-file-diagram.png)
 
 ### Frontend - Delete files from S3
 
@@ -1177,6 +1179,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 ### References and Further Reading
 
+[Diagram created with Excalidraw](https://excalidraw.com/#json=yxJaRLLQlSAwKPuK3va91,UJ-_cqop7_cUyPCs7foc_w)
 [Upload files with NextJS + Fetch + Api routes + Typescript](https://devpress.csdn.net/react/62eb6bd020df032da732b2ea.html)
 [Minio Docs](https://docs.min.io/docs/javascript-client-api-reference.html)
 
