@@ -265,45 +265,6 @@ function ModeSwitchMenu({ uploadMode, handleModeChange }: ModeSwitchMenuProps) {
 }
 ```
 
-### Upload form UI
-
-To upload files, we will create a form with a file input field. `UploadFilesFormUI.tsx` will contain the UI for the upload form which will be used in both approaches. Here is a simplified version of the file:
-
-```tsx filename="src/components/UploadFilesForm/UploadFilesFormUI.tsx" copy
-import Link from 'next/link'
-import { LoadSpinner } from '../LoadSpinner'
-import { type UploadFilesFormUIProps } from '~/utils/types'
-
-export function UploadFilesFormUI({ isLoading, fileInputRef, uploadToServer, maxFileSize }: UploadFilesFormUIProps) {
-  return (
-    <form className='flex flex-col items-center justify-center gap-3' onSubmit={uploadToServer}>
-      <h1 className='text-2xl'>File upload example using Next.js, MinIO S3, Prisma and PostgreSQL</h1>
-      {isLoading ? (
-        <LoadSpinner />
-      ) : (
-        <div className='flex h-16 gap-5'>
-          <input
-            id='file'
-            type='file'
-            multiple
-            className='rounded-md border bg-gray-100 p-2 py-5'
-            required
-            ref={fileInputRef}
-          />
-          <button
-            disabled={isLoading}
-            className='m-2 rounded-md bg-blue-500 px-5 py-2 text-white
-                hover:bg-blue-600  disabled:cursor-not-allowed disabled:bg-gray-400'
-          >
-            Upload
-          </button>
-        </div>
-      )}
-    </form>
-  )
-}
-```
-
 ### File item UI
 
 To display the files, we will create a component `FileItem.tsx` that will display the file name, size, and a delete button. Here is a simplified version of the file without functions to download and delete files. These functions will be added later.
@@ -392,9 +353,48 @@ export function FilesContainer({ files, fetchFiles, setFiles, downloadUsingPresi
 }
 ```
 
-## 1. Upload and download files using Next.js API routes (4MB limit)
+### Upload form UI
 
-![Upload and files using Next.js API route](/blog-assets/file-storage-nextjs-postgres-s3/API-route-upload-diagram.png)
+To upload files, we will create a form with a file input field. `UploadFilesFormUI.tsx` will contain the UI for the upload form which will be used in both approaches. Here is a simplified version of the file:
+
+```tsx filename="src/components/UploadFilesForm/UploadFilesFormUI.tsx" copy
+import Link from 'next/link'
+import { LoadSpinner } from '../LoadSpinner'
+import { type UploadFilesFormUIProps } from '~/utils/types'
+
+export function UploadFilesFormUI({ isLoading, fileInputRef, uploadToServer, maxFileSize }: UploadFilesFormUIProps) {
+  return (
+    <form className='flex flex-col items-center justify-center gap-3' onSubmit={uploadToServer}>
+      <h1 className='text-2xl'>File upload example using Next.js, MinIO S3, Prisma and PostgreSQL</h1>
+      {isLoading ? (
+        <LoadSpinner />
+      ) : (
+        <div className='flex h-16 gap-5'>
+          <input
+            id='file'
+            type='file'
+            multiple
+            className='rounded-md border bg-gray-100 p-2 py-5'
+            required
+            ref={fileInputRef}
+          />
+          <button
+            disabled={isLoading}
+            className='m-2 rounded-md bg-blue-500 px-5 py-2 text-white
+                hover:bg-blue-600  disabled:cursor-not-allowed disabled:bg-gray-400'
+          >
+            Upload
+          </button>
+        </div>
+      )}
+    </form>
+  )
+}
+```
+
+## 1. Upload files using Next.js API routes (4MB limit)
+
+![Upload files using Next.js API route](/blog-assets/file-storage-nextjs-postgres-s3/API-route-upload-diagram.png)
 
 The diagram above shows the steps involved in uploading and downloading files using Next.js API routes.
 
@@ -403,12 +403,6 @@ To upload files:
 1. User sends a POST request to the API route with the file to upload.
 2. The API route uploads the file to S3 and returns the file name.
 3. The file name is saved in the database.
-
-To download files:
-
-1. User sends a GET request to the API route to get data from the database about the file(s) to download.
-2. The API route downloads the file from S3.
-3. The file is returned to the user from the API route.
 
 ### Frontend - Upload form logic for API routes
 
@@ -481,8 +475,6 @@ export function UploadFilesRoute({ onUploadSuccess }: UploadFilesFormProps) {
 ```
 
 Check the full code in the [GitHub repository](https://github.com/aleksandr-efimenko/local-nextjs-postgres-s3/blob/main/src/components/UploadFilesForm/UploadFilesRoute.tsx)
-
-### Frontend - Download files using Next.js API routes
 
 ### Backend - Upload files using Next.js API routes
 
@@ -651,6 +643,103 @@ export default handler
 ```
 
 Remember to include `export const config`, this prevents built-in body parser of Next.js from parsing the request body, which allows formidable to work.
+
+## 1.2 Download files using Next.js API routes (4MB limit)
+
+To download files:
+
+1. User sends a GET request to the API route to get data from the database about the file(s) to download.
+2. The API route downloads the file from S3.
+3. The file is returned to the user from the API route.
+
+### Frontend - Download files using Next.js API routes
+
+To download files, we will create a function `downloadFile` inside of the FileItem component. The function sends a GET request to the API route to download the file from S3. The file is returned to the user from the API route.
+
+```ts filename="src/utils/fileUploadHelpers.ts" copy
+const downloadFile = async (file: FileProps) => {
+  window.open(`/api/files/download/smallFiles/${file.id}`, '_blank')
+}
+```
+
+### Backend - Download files using Next.js API routes
+
+#### 1. Create a utility function to download files from S3
+
+To download files from S3, we will create a utility function `getFileFromBucket` that uses the [`getObject` method](https://min.io/docs/minio/javascript-client-api-reference#getObject) of the Minio client to download the file from the S3 bucket.
+
+```ts filename="src/utils/s3-file-management.ts" copy
+/**
+ * Get file from S3 bucket
+ * @param bucketName name of the bucket
+ * @param fileName name of the file
+ * @returns file from S3
+ */
+export async function getFileFromBucket({ bucketName, fileName }: { bucketName: string; fileName: string }) {
+  try {
+    await s3Client.statObject(bucketName, fileName)
+  } catch (error) {
+    console.error(error)
+    return null
+  }
+  return await s3Client.getObject(bucketName, fileName)
+}
+```
+
+#### 2. Create an API route to download files
+
+To download files, we will create an API route to handle file downloads. Create a file `[id].ts` in the `pages/api/files/download/` folder. This file will download the file from S3 and return it to the user.
+
+Here we use a dynamic route of Next.js with [id] to get the file id from the request query. More information about dynamic routes can be found in the [Next.js docs](https://nextjs.org/docs/routing/dynamic-routes).
+
+The algorithm for downloading files from the server is as follows:
+
+- Get the file name and original name from the database using Prisma `file.findUnique` method.
+- Get the file from the S3 bucket using the `getFileFromBucket` function.
+- Set the header for downloading the file.
+- Pipe the file to the response object.
+
+```ts filename="src/pages/api/files/download/[id].ts" copy
+import { type NextApiRequest, type NextApiResponse } from 'next'
+import { getFileFromBucket } from '~/utils/s3-file-management'
+import { env } from '~/env'
+import { db } from '~/server/db'
+
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { id } = req.query
+  if (typeof id !== 'string') return res.status(400).json({ message: 'Invalid request' })
+
+  // get the file name and original name from the database
+  const fileObject = await db.file.findUnique({
+    where: {
+      id,
+    },
+    select: {
+      fileName: true,
+      originalName: true,
+    },
+  })
+  if (!fileObject) {
+    return res.status(404).json({ message: 'Item not found' })
+  }
+  // get the file from the bucket and pipe it to the response object
+  const data = await getFileFromBucket({
+    bucketName: env.S3_BUCKET_NAME,
+    fileName: fileObject?.fileName,
+  })
+
+  if (!data) {
+    return res.status(404).json({ message: 'Item not found' })
+  }
+  // set header for download file
+  res.setHeader('content-disposition', `attachment; filename="${fileObject?.originalName}"`)
+
+  // pipe the data to the res object
+  data.pipe(res)
+}
+
+export default handler
+```
 
 ## 2. Upload and download files using presigned URLs
 
@@ -1027,7 +1116,7 @@ export async function deleteFileFromBucket({ bucketName, fileName }: { bucketNam
 
 #### 2. Create an API route to delete files from S3
 
-Here is an example of an API route to delete files from S3. Create a file `delete/[id].ts` in the `pages/api/files/delete` folder. This file will delete the file from the S3 bucket and the database. We use dynamic routes of Next.js to get the file id from the request query. More information about dynamic routes can be found in the [Next.js docs](https://nextjs.org/docs/routing/dynamic-routes).
+Here is an example of an API route to delete files from S3. Create a file `delete/[id].ts` in the `pages/api/files/delete` folder. This file will delete the file from the S3 bucket and the database.
 
 The algorithm for deleting files from S3:
 
