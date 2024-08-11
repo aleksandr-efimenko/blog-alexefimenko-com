@@ -9,6 +9,11 @@ export default function Document() {
       <Head />
       <meta name='google-adsense-account' content={googleAdsClientId}></meta>
       <script async src='https://us.umami.is/script.js' data-website-id={umamiId} />
+      <script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${googleAdsClientId}`}
+        crossOrigin='anonymous'
+      ></script>
       <body>
         <Main />
         <NextScript />
