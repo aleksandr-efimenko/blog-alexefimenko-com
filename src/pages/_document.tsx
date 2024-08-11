@@ -8,13 +8,13 @@ export default function Document() {
   return (
     <Html lang='en'>
       <Head />
-      <Script
+      <script
         async
         src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${googleAdsClientId}`}
         strategy='lazyOnload'
         crossOrigin='anonymous'
       />
-      <Script async src='https://us.umami.is/script.js' data-website-id={umamiId} />
+      <script async src='https://us.umami.is/script.js' data-website-id={umamiId} />
       <body>
         <Main />
         <NextScript />
