@@ -11,9 +11,8 @@ export default function Document() {
       <script
         async
         src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${googleAdsClientId}`}
-        strategy='lazyOnload'
-        crossOrigin='anonymous'
-      />
+        crossorigin='anonymous'
+      ></script>
       <script async src='https://us.umami.is/script.js' data-website-id={umamiId} />
       <body>
         <Main />
