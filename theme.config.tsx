@@ -66,7 +66,9 @@ export default {
           </p>
           <p>If you use material from this blog, please provide a link to the original article.</p>
         </div>
-        <a href={buyMeACoffeeUrl} target="_blank"><Image width={217} height={60} src={BuyCoffee} alt="Buy Me A Coffee" /></a>
+        {buyMeACoffeeUrl ? (
+          <a href={buyMeACoffeeUrl} target="_blank"><Image width={217} height={60} src={BuyCoffee} alt="Buy Me A Coffee" /></a>
+        ) : null}
       </div>
     ),
   },
