@@ -9,7 +9,6 @@ export default function Document() {
     <Html lang='en'>
       <Head />
       <meta name='google-adsense-account' content={googleAdsClientId}></meta>
-      <meta name='impact-site-verification' value={impactId}></meta>
       <script async src='https://us.umami.is/script.js' data-website-id={umamiId} />
       <script
         async
@@ -17,6 +16,7 @@ export default function Document() {
         crossOrigin='anonymous'
       ></script>
       <body>
+      <p className='hidden'>Impact-Site-Verification: {impactId}</p>
         <Main />
         <NextScript />
       </body>
