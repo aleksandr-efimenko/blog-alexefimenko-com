@@ -1,4 +1,3 @@
-import { ReferralBanner } from '@/components/ui/referral-banner'
 import { Html, Head, Main, NextScript } from 'next/document'
 
 const umamiId = process.env.NEXT_PUBLIC_UMAMI_ID
