@@ -1,5 +1,9 @@
 /* eslint-disable import/no-anonymous-default-export */
 import Image from 'next/image'
+import BuyCoffee from "./public/images/buy-coffee-default-yellow.png"
+
+const buyMeACoffeeUrl = process.env.NEXT_PUBLIC_BUY_ME_A_COFFEE_URL
+
 export default {
   logo: (
     <div className='flex gap-x-5 items-center justify-center'>
@@ -47,19 +51,24 @@ export default {
   ),
   footer: {
     text: (
-      <div>
-        <p>
-          This blog was built with{' '}
-          <a href='https://nextra.site/' target='_blank' rel='noopener noreferrer' className='underline'>
-            Nextra
-          </a>{' '}
-          and{' '}
-          <a href='https://the-guild.dev/' target='_blank' rel='noopener noreferrer' className='underline'>
-            The Guild
-          </a>{' '}
-          components.
-        </p>
-        <p>If you use material from this blog, please provide a link to the original article.</p>
+      <div className='w-full flex justify-between items-center'>
+        <div>
+          <p>
+            This blog was built with{' '}
+            <a href='https://nextra.site/' target='_blank' rel='noopener noreferrer' className='underline'>
+              Nextra
+            </a>{' '}
+            and{' '}
+            <a href='https://the-guild.dev/' target='_blank' rel='noopener noreferrer' className='underline'>
+              The Guild
+            </a>{' '}
+            components.
+          </p>
+          <p>If you use material from this blog, please provide a link to the original article.</p>
+        </div>
+        {buyMeACoffeeUrl ? (
+          <a href={buyMeACoffeeUrl} target="_blank"><Image width={217} height={60} src={BuyCoffee} alt="Buy Me A Coffee" /></a>
+        ) : null}
       </div>
     ),
   },
